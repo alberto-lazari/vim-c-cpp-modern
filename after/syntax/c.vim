@@ -47,13 +47,30 @@ if get(g:, 'cpp_type_name_highlight', 1)
     endif
 endif
 
+" [OPINION] Highlight CamelCase names as types
+if get(g:, 'cpp_custom_type_name_highlight', 0) && &filetype ==# 'cpp'
+    syn match cTypeName "[A-Z_]\w\+"
+endif
+
+" [OPINION] Highlight CAPITALIZED names as constants (values or macros)
+if get(g:, 'cpp_custom_macros_highlight', 0)
+    syn match   cCustomConstant "\<[A-Z_]\+\>\((\?\)\@="
+    hi def link cCustomConstant Constant
+endif
+
+" Class and namespace scope
+if get(g:, 'cpp_custom_macros_highlight', 1)
+    syn match cCustomScope "::"
+    syn match cCustomClass "\w\+\s*::" contains=cCustomScope
+    hi def link cCustomClass Typedef
+endif
+
 
 " Highlight operators
 if get(g:, 'cpp_operator_highlight', 0)
-    syn match cOperator "[?!~*&%<>^|=,+]"
+    syn match cOperator "[?!~*&%<>^|=+-]"
     syn match cOperator "[][]"
     syn match cOperator "[^:]\@1<=:[^:]\@="
-    syn match cOperator "-[^>]"me=e-1
     syn match cOperator "/[^/*]"me=e-1
 endif
 
