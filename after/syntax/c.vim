@@ -12,6 +12,12 @@
 syn keyword cTodo contained BUG NOTE
 
 
+" [OPINION] Highlight CamelCase names as types
+if get(g:, 'cpp_custom_type_name_highlight', 0) && &filetype ==# 'cpp'
+    syn match cTypeName "[A-Z_]\w\+"
+endif
+
+
 " Highlight function names
 if get(g:, 'cpp_function_highlight', 1)
     syn match cUserFunction "\<\h\w*\ze\_s\{-}(\%(\*\h\w*)\_s\{-}(\)\@!"
@@ -47,16 +53,13 @@ if get(g:, 'cpp_type_name_highlight', 1)
     endif
 endif
 
-" [OPINION] Highlight CamelCase names as types
-if get(g:, 'cpp_custom_type_name_highlight', 0) && &filetype ==# 'cpp'
-    syn match cTypeName "[A-Z_]\w\+"
-endif
 
 " [OPINION] Highlight CAPITALIZED names as constants (values or macros)
 if get(g:, 'cpp_custom_macros_highlight', 0)
     syn match   cCustomConstant "\<[A-Z_]\+\>\((\?\)\@="
     hi def link cCustomConstant Constant
 endif
+
 
 " Class and namespace scope
 if get(g:, 'cpp_custom_macros_highlight', 1)
