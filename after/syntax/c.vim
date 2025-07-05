@@ -54,27 +54,29 @@ if get(g:, 'cpp_type_name_highlight', 1)
 endif
 
 
-" [OPINION] Highlight CAPITALIZED names as constants (values or macros)
-if get(g:, 'cpp_custom_macros_highlight', 0)
-    syn match   cCustomConstant /\<[A-Z_]\{2,}\>\((\?\)\@=/
-    hi def link cCustomConstant Constant
-endif
-
-
-" Class and namespace scope
-if get(g:, 'cpp_custom_macros_highlight', 1)
-    syn match cCustomScope "::"
-    syn match cCustomClass "\w\+\s*::" contains=cCustomScope
-    hi def link cCustomClass Typedef
+" [OPINION] Highlight CAPITALIZED names as macros
+if get(g:, 'cpp_custom_macro_highlight', 0)
+    syn match Constant /\<[A-Z_]\{2,}\>\((\?\)\@=/
 endif
 
 
 " Highlight operators
-if get(g:, 'cpp_operator_highlight', 0)
+if get(g:, 'cpp_operator_highlight', 1)
     syn match cOperator "[?!~*&%<>^|=+-]"
     syn match cOperator "[][]"
     syn match cOperator "[^:]\@1<=:[^:]\@="
     syn match cOperator "/[^/*]"me=e-1
+endif
+
+
+" Highlight delimiters
+if get(g:, 'cpp_delimiter_highlight', 1)
+    syn match cDelimiter /[(){},;]/
+    hi def link cDelimiter Delimiter
+
+    if &filetype ==# 'cpp'
+        syn match cDelimiter /::/
+    endif
 endif
 
 

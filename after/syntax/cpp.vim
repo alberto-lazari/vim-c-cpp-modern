@@ -214,3 +214,12 @@ if get(g:, 'cpp_simple_highlight', 0)
     hi! def link cppExceptions   Statement
     hi! def link cppStorageClass Statement
 endif
+
+
+" Class and namespace scope
+if get(g:, 'cpp_custom_scope_highlight', 0)
+
+    syn clear cppSTLnamespace
+    syn match cppCustomNamespace /\<\w\+\ze\s*::/
+    hi def link cppCustomNamespace Delimiter
+endif
