@@ -14,7 +14,7 @@ syn keyword cTodo contained BUG NOTE
 
 " [OPINION] Highlight CamelCase names as types
 if get(g:, 'cpp_custom_type_name_highlight', 0) && &filetype ==# 'cpp'
-    syn match cTypeName "\<[A-Z_]\w\+"
+    syn match cTypeName /\<[A-Z_]\w\+\>/
 endif
 
 
@@ -56,7 +56,7 @@ endif
 
 " [OPINION] Highlight CAPITALIZED names as constants (values or macros)
 if get(g:, 'cpp_custom_macros_highlight', 0)
-    syn match   cCustomConstant "\<[A-Z_]\+\>\((\?\)\@="
+    syn match   cCustomConstant /\<[A-Z_]\{2,}\>\((\?\)\@=/
     hi def link cCustomConstant Constant
 endif
 
