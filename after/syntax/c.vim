@@ -14,7 +14,7 @@ syn keyword cTodo contained BUG NOTE
 
 " [OPINION] Highlight CamelCase names as types
 if get(g:, 'cpp_custom_type_name_highlight', 0) && &filetype ==# 'cpp'
-    syn match cTypeName /\<[A-Z_]\w\+\>/
+    syn match cTypeName /\<[A-Z]\w\+\>/
 endif
 
 
